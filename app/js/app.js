@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and core components
-var app = angular.module('myApp', ["ngRoute"]);
+var app = angular.module('myApp', ["ngRoute", "ngAnimate"]);
 
 app.config(function($routeProvider) {
     $routeProvider
