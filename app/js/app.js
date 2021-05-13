@@ -6,9 +6,9 @@ var app = angular.module('myApp', ["ngRoute"]);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
-      templateUrl : "main/main.html"
+      templateUrl : "pages/main.html"
     })
     .when("/login", {
-      templateUrl : "/login/login.html"
+      templateUrl : "pages/login.html"
     })
   });
