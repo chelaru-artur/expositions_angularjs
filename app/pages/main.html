@@ -15,8 +15,8 @@
       
               </ul>
               <form class="form-inline mt-2 mt-md-0 d-flex">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="text" placeholder="Filter by keyword" ng-model="keyword" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" ng-click="keyword = '';">Clear</button>
               </form>
             </div>
           </nav>
@@ -29,7 +29,7 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-md-4" ng-repeat="item in data">
+          <div class="col-md-4" ng-repeat="item in filteredItems = (data| filter: keyword)">
             <div class="card mb-4 box-shadow">
               <img class="card-img-top" src="{{item.imgSrc}}" alt="Card image cap">
               <div class="card-body">
@@ -43,7 +43,8 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+        <h2 ng-if="!filteredItems.length"> No data found</h2>
         </div>
       </div>
     </div>
