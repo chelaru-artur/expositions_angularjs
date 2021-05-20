@@ -19,7 +19,9 @@ app.config(function($routeProvider) {
   });
 
   app.controller('loginController', function($scope) {
-
+    $scope.login = function (data) {
+      console.log(data);
+    }
   });
 
 
@@ -42,3 +44,10 @@ app.config(function($routeProvider) {
       $scope.showModal = false;
     };
   })
+
+  app.service('auth', function() {
+    var isLoggedIn = false;
+    this.login = function(username, password) {
+
+    };
+  });
