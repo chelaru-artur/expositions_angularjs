@@ -18,14 +18,21 @@ app.config(function($routeProvider) {
     })
   });
 
-  app.controller('loginController', function($scope) {
-    $scope.login = function (data) {
-      console.log(data);
+  app.controller('loginController', function($scope, auth) {
+    $scope.invalidLogin = false;
+    $scope.login = function (loginData) {
+      const result = auth.login(loginData.username, loginData.password);
+      if (!result) {
+        $scope.invalidLogin = true;
+      }
     }
   });
 
 
-  app.controller('mainController', function($scope) {
+  app.controller('mainController', function($scope, auth, $location) {
+    if (!auth.isAuthenticaded()) {
+      $location.path('/login')
+    }
     $scope.data = [];
     $scope.showModal = false;
     $scope.selectedItem = null;
@@ -45,9 +52,16 @@ app.config(function($routeProvider) {
     };
   })
 
-  app.service('auth', function() {
+  app.service('auth', function($location) {
     var isLoggedIn = false;
+    const credentials = {username: 'admin', password: 'admin'};
     this.login = function(username, password) {
-
+      if (username === credentials.username && password === credentials.password) {
+        isLoggedIn = true;
+        $location.path('/main');
+      } else {
+        return false;
+      }
     };
+    this.isAuthenticaded = function () { return isLoggedIn; }
   });

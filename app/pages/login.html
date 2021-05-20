@@ -1,19 +1,20 @@
-<form class="form-signin  col-4 offset-5" name="loginForm">
+<form class="form-signin  col-4 offset-5" name="loginForm" novalidate>
     <div class="d-flex justify-content-center">
-        <img class="mb-4" src="https://seeklogo.com/images/E/exhibition-continues-logo-524FB45CAD-seeklogo.com.gif" alt="" width="200" height="200">
+        <img class="mb-4" src="https://seeklogo.com/images/E/exhibition-continues-logo-524FB45CAD-seeklogo.com.gif" ng-init="loginData.username='admin'; loginData.password='admin'" alt="" width="200" height="200">
     </div>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" ng-model="loginData.username" required autofocus>
+      <label for="inputEmail" class="sr-only">Username</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Enter username" name="username"  ng-model="loginData.username" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" name="password" class="form-control" ng-model="loginData.password" placeholder="Password" required>
+      <input type="password" id="inputPassword" name="password" class="form-control" ng-model="loginData.password" value="admin" placeholder="Password" required>
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      valid? {{loginForm.$valid}}
-      <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login(loginData)">Sign in</button>
-    <p class="mt-5 mb-3 text-muted text-center">&copy; </p>
+      <button ng-disabled="loginForm.$invalid" class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login(loginData)">Sign in</button>
+    
+    <h4 class="text-danger" ng-if="invalidLogin">Username or password is incorect</h4>
+      <p class="mt-5 mb-3 text-muted text-center">&copy; </p>
 
   </form>
